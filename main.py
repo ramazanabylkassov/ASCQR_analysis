@@ -7,14 +7,14 @@ import numpy as np
 st.set_page_config(layout="wide", page_title='Ryte.ai')
 
 asc_definitions = {
-        "ASC-9": "Endoscopy/Polyp Surveillance: Appropriate Follow-up Interval for Normal Colonoscopy in Average Risk Patients",
-        "ASC-11": "Improvement in Patient’s Visual Function within 90 Days Following Cataract Surgery",
+        "ASC-9": "Percentage of patients receiving appropriate recommendation for follow-up screening colonoscopy",
+        "ASC-11": "Percentage of patients who had cataract surgery and had improvement in visual function within 90 days following the surgery",
         "ASC-12": "Rate of unplanned hospital visits after an outpatient colonoscopy",
-        "ASC-13": "Normothermia",
-        "ASC-14": "Unplanned Anterior Vitrectomy",
-        "ASC-17": "Hospital Visits after Orthopedic Ambulatory Surgical Center Procedures",
-        "ASC-18": "Hospital Visits after Urology Ambulatory Surgical Center Procedures",
-        "ASC-20": "Percentage of healthcare personnel who completed COVID-19 primary vaccination series",
+        "ASC-13": "Percentage of patients who received anesthesia who had a body temperature of 96.8 Fahrenheit within 15 minutes of arriving in the post-anesthesia care unit",
+        "ASC-14": "Percentage of cataract surgeries that had an unplanned additional eye surgery (anterior vitrectomy)",
+        "ASC-17": "Rate of unplanned hospital visits within 7 days of an orthopedic surgery at an ASC",
+        "ASC-18": "Rate of unplanned hospital visits within 7 days of a urology surgery at an ASC ",
+        "ASC-20": "Percentage of all core healthcare personnel (HCP) eligible to work at the ASC for at least one day of the self-selected week, in each month of quarterly data reporting, who completed COVID-19 primary vaccination series.",
     }
 footnote_dict = {
             '1': "The number of cases/patients is too few to report.",
@@ -91,12 +91,18 @@ def main():
     df = load_data()
     st.markdown("<h1 style='text-align: center;'>Ambulatory Surgical Center Quality Measures</h1>", unsafe_allow_html=True)
     st.markdown("<h1 style='text-align: center'>Facility</h1>", unsafe_allow_html=True)
+    st.write('###')
+    st.markdown('''**Overview**  
+                Authorized by the Medicare Improvement and Extension Act-Tax Relief and Health Care Act of 2006, the Ambulatory Surgical Center Quality Reporting (ASCQR) Program is a pay-for-reporting program which collects and publicly reports facility-level quality measure data from ambulatory surgical centers (ASCs) paid under the ASC fee schedule for care provided in this setting.
+                ''')
+    st.write('---')
+
     # df = pd.read_csv('ASC_Facility.csv', sep=None, engine='python')
     year = st.radio('Choose year', df['Year'].unique(), horizontal=True)
     df = df[df['Year']==year]
     st.dataframe(df, use_container_width=True)
     st.write('---')
-    tabs = st.tabs(['Hospital reporting analysis', 'Report submission ranking', 'Specific performance evaluation'])
+    tabs = st.tabs(['Hospital reporting analysis', 'Report submission ranking', 'Specific quality measure evaluation'])
     with tabs[0]:
         reporting_analysis(df=df, key='original')
         st.write('---')
@@ -184,7 +190,7 @@ def asc_analysis(df=None, key=None):
     st.write('###')
     cols = st.columns(2)
     with cols[0]:
-        asc_to_analyze = st.selectbox('Choose feature to analyze', list(asc_definitions.keys()), key=key)
+        asc_to_analyze = st.selectbox('Choose quality measure to analyze', list(asc_definitions.keys()), key=key)
         asc_features = [item for item in df.columns if f'{asc_to_analyze}' in item]
     with cols[1]:
         checkboxes = {}
