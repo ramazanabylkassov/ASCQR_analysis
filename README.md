@@ -27,7 +27,7 @@ Make sure you have Python installed on your machine. You can install it from [py
 ### Running the App
 Run the following command to start the web app:
 ```bash
-streamlit run app.py
+streamlit run main.py
 ```
 Open your browser and navigate to http://localhost:8501 to access the Ambulatory Surgical Center Quality Reporting Analyzer.
 
