@@ -15,7 +15,7 @@ Make sure you have Python installed on your machine. You can install it from [py
 ### Installation
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/asc-quality-reporting-analyzer.git
+    git clone https://github.com/ramazanabylkassov/ASQR_analysis.git
     cd asc-quality-reporting-analyzer
     ```
 
