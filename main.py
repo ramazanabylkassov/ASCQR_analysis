@@ -4,7 +4,7 @@ import plotly.express as px
 import requests
 import numpy as np 
 
-st.set_page_config(layout="wide", page_title='Ryte.ai')
+st.set_page_config(layout="wide", page_title='ASCQR analysis')
 
 asc_definitions = {
         "ASC-9": "Percentage of patients receiving appropriate recommendation for follow-up screening colonoscopy",
